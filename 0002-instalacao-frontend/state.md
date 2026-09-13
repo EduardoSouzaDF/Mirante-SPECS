@@ -1,10 +1,12 @@
 # Estado da Spec 0002
 
-- Fase atual: especificacao
-- Última ação: spec.md, plan.md, tasks.md e tests.md preenchidos; branches
-  `feature/0002-instalacao-frontend` criadas nos repos frontend, backend e
-  specs; `new_spec.sh` atualizado para criar branch também no repo specs.
-- Próximo passo: validar o spec.md com o time; em seguida partir para a
-  implementação (tarefas de frontend).
+- Fase atual: implementacao (frontend implementado e validado)
+- Última ação: projeto Angular 17 criado no repo frontend com PrimeNG 17,
+  design tokens verde-petróleo, estrutura core/shared/features, pipes pt-BR,
+  proxy /api → 3100, README. Validado: ng build ✔, ng test 9/9 ✔, ng serve
+  HTTP 200 ✔. Skills do Angular instaladas no ambiente.
+- Próximo passo: revisão visual do tema pelo time; marcar spec como concluída
+  e commitar (frontend). Validação real do proxy quando o backend mock tiver
+  a primeira rota (spec futura).
 - Bloqueios: nenhum
 - Atualizado em: 2026-09-13

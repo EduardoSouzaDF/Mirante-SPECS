@@ -1,9 +1,9 @@
 # Estado global do SDD
 
 - Spec ativa: 0002 — Instalação FrontEnd
-- Fase atual: especificacao
+- Fase atual: em-testes (frontend implementado e validado)
 - Última spec concluída: -
-- Próxima ação sugerida: validar o spec.md da 0002 e iniciar o planejamento/implementação do frontend
+- Próxima ação sugerida: revisão visual do tema pelo time; marcar spec como concluída; commitar frontend (e specs)
 
 ## Histórico de retomada
 
