@@ -1,12 +1,13 @@
 # Estado global do SDD
 
 - Spec ativa: 0004 — Consultar Lotes
-- Fase atual: planejamento (spec/plan/tasks/tests preenchidos; iniciando implementação backend)
+- Fase atual: em-testes (backend + frontend implementados e commitados; aguardando validação visual do usuário antes de push/PR)
 - Última spec concluída: 0003 — Instalação Mock Server - Login
-- Próxima ação sugerida: implementar backend (src/lotes.js, mocks/routes/lotes.js, collections.js)
+- Próxima ação sugerida: usuário validar a tela `/lotes` rodando mock + ng serve; depois push + PR nos 3 repos
 
 ## Histórico de retomada
 
+- 2026-09-13 — spec 0004 implementada (backend: src/lotes.js + mocks/routes/lotes.js + collections.js; frontend: breadcrumb refatorado, range-field, filter-panel, lote-table, lote-actions, lote-detail-dialog, LoteFacade RxJS, LotesPageComponent + rota); testes unitários (30/30) e e2e Playwright (6/6) verdes; validação visual via screenshot comparada ao protótipo; 2 bugs reais encontrados e corrigidos durante a implementação (breadcrumb quebrando navegação pós-login; facade disparando busca duplicada em pesquisar()) — detalhes em `0004-consultar-lotes/state.md`
 - 2026-09-13 — spec 0004 iniciada (Consultar Lotes); spec/plan/tasks/tests preenchidos a partir do plano do usuário; protótipo `docs/consulta.png` copiado para `specs/0004-consultar-lotes/prototipos/`; branch feature/0004-consultar-lotes criada nos 3 repos (frontend/backend a partir de main; specs a partir do estado atual, pois main do repo specs ainda não tem os PRs 0002/0003 mesclados)
 - 2026-09-13 — spec 0003 validada pelo usuário e PR já feito; spec encerrada
 - 2026-09-13 — spec 0003 em validação visual (Playwright): PrimeFlex + responsividade mobile aplicados (sidebar = drawer no mobile); PRs só após aprovação do usuário
