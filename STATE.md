@@ -1,13 +1,11 @@
 # Estado global do SDD
 
-- Spec ativa: nenhuma
-- Fase atual: -
-- Última spec concluída: -
-- Próxima ação sugerida: criar a primeira spec real (0002, já que 0001 é o template de exemplo)
+- Spec ativa: 0003 — Instalação Mock Server - Login
+- Fase atual: implementacao
+- Última spec concluída: 0002 — Instalação FrontEnd
+- Próxima ação sugerida: implementar backend (mock de auth + delay via env) e frontend (tela de login, cookie, interceptors, loader, menu lateral e breadcrumbs)
 
 ## Histórico de retomada
 
-<!--
-Cada vez que uma demanda for pausada, adicione uma linha aqui, por exemplo:
-- 2026-09-13 — pausado na spec 0003, fase "implementacao", faltava terminar as tasks de backend
--->
+- 2026-09-13 — spec 0003 iniciada (Instalação Mock Server - Login); spec/plan/tasks/tests preenchidos; implementação do backend em andamento
+- 2026-09-13 — spec 0002 concluída (Instalação FrontEnd); commits locais, push e PRs abertos (frontend e specs; backend sem alterações); fluxo SDD atualizado: conclusão de spec passa a fazer commits + push + PR
