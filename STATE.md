@@ -1,13 +1,10 @@
 # Estado global do SDD
 
-- Spec ativa: nenhuma
-- Fase atual: -
+- Spec ativa: 0002 — Instalação FrontEnd
+- Fase atual: especificacao
 - Última spec concluída: -
-- Próxima ação sugerida: criar a primeira spec real (0002, já que 0001 é o template de exemplo)
+- Próxima ação sugerida: validar o spec.md da 0002 e iniciar o planejamento/implementação do frontend
 
 ## Histórico de retomada
 
-<!--
-Cada vez que uma demanda for pausada, adicione uma linha aqui, por exemplo:
-- 2026-09-13 — pausado na spec 0003, fase "implementacao", faltava terminar as tasks de backend
--->
+- 2026-09-13 — spec 0002 criada (Instalação FrontEnd), fase "especificacao"; branches feature/0002-instalacao-frontend criadas nos repos frontend, backend e specs; new_spec.sh passou a criar branch também no repo specs
