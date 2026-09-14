@@ -1,33 +1,38 @@
 # Tarefas — Spec 0005
 
 ## Backend (Mock Server)
-- [ ] Criar `src/contas-correntes.js`: seed de `ContaCorrente` (`id`,
-      `agencia`, `conta`, `instituicaoId`), várias por instituição.
-- [ ] Criar `src/lancamentos.js`: seed inicial vazia (ou poucos exemplos),
-      helpers para criar `Lancamento` (`id`, `contaCorrenteId`, `valor`,
-      `historico`, `estorno`, `documentos: Arquivo[]`, `descricao`,
-      `situacao` sempre `"Pendente"` na criação) e `proximoIdLancamento()`.
-- [ ] Ajustar `src/lotes.js`: remover `valor`/`quantidadeLancamentos` da
-      seed e do `paraApi()`/`paraApiDetalhe()`; sempre incluir
-      `lancamentos` (completo) na resposta de listagem e detalhe.
-- [ ] Adicionar `calcularValorLote(lote)` em `src/lotes.js`, usada
-      internamente por `buscarLotes()` para os filtros `valorDe`/`valorAte`
-      (a comparação já não pode usar `lote.valor` direto).
-- [ ] Adicionar função `criarLoteComLancamento(lancamento, instituicaoId)`
+- [x] Criar `src/instituicoes.js` (instituições extraídas, compartilhadas
+      entre lotes/contas-correntes/lançamentos).
+- [x] Criar `src/contas-correntes.js`: seed de `ContaCorrente` (`id`,
+      `agencia`, `conta`, `instituicaoId`), uma por instituição.
+- [x] Criar `src/lancamentos.js`: helpers para criar `Lancamento` (`id`,
+      `contaCorrenteId`, `valor`, `historico`, `estorno`,
+      `documentos: Arquivo[]`, `descricao`, `situacao` sempre `"Pendente"`
+      na criação) com id global (não reinicia por lote).
+- [x] Ajustar `src/lotes.js`: remover `valor`/`quantidadeLancamentos` da
+      seed e do `paraApi()` (função única agora, sem `paraApiDetalhe`
+      separado); sempre incluir `lancamentos` (completo) na resposta de
+      listagem e detalhe.
+- [x] Adicionar `calcularValorLote(lote)` (e
+      `calcularQuantidadeLancamentos`) em `src/lotes.js`, usada
+      internamente por `buscarLotes()` para os filtros `valorDe`/`valorAte`.
+- [x] Adicionar função `criarLoteComLancamento(lancamento, instituicaoId)`
       em `src/lotes.js`: cria um lote novo (situação `Aberto`,
       `instituicaoId`/`instituicaoRespId` = instituição da conta) com o
       lançamento dentro; devolve o lote criado.
-- [ ] Criar `mocks/routes/contas-correntes.js` com
+- [x] Criar `mocks/routes/contas-correntes.js` com
       `GET /api/contas-correntes?numero=...` (localiza a conta; 404 se não
       achar; devolve `{ conta, instituicao }`).
-- [ ] Criar `mocks/routes/lancamentos.js` com `POST /api/lancamentos`
+- [x] Criar `mocks/routes/lancamentos.js` com `POST /api/lancamentos`
       (cria lançamento + lote novo; 400 se `contaCorrenteId` inválido,
       `valor` ausente/≤0, `historico` ausente, `documentos` vazio).
-- [ ] Atualizar `mocks/collections.js` (collection `base`) com as rotas
+- [x] Atualizar `mocks/collections.js` (collection `base`) com as rotas
       novas.
-- [ ] Validar manualmente com `curl`: busca de conta (sucesso e 404),
-      criação de lançamento (sucesso e cada validação 400), e conferir que
-      `GET /api/lotes` passou a trazer `lancamentos` em todos os itens.
+- [x] Validar manualmente (script Node, evitando problema de encoding do
+      `curl` em bash com acentos): busca de conta (sucesso e 404),
+      criação de lançamento (sucesso e cada validação 400), `GET /api/lotes`
+      trazendo `lancamentos` sem `valor`/`quantidadeLancamentos`, e filtro
+      `valorDe`/`valorAte` calculado batendo certo.
 
 ## Frontend (Angular 17)
 - [ ] Criar modelos: `core/models/conta-corrente.model.ts`
