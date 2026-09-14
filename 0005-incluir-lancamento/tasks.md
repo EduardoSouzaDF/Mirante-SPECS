@@ -104,11 +104,11 @@
       real (select pesquisável + dropzone + POST /api/lancamentos)
       confirma `usuarioRegistro` do lote como o usuário autenticado, modal
       fecha e o toast de sucesso aparece, anima a barra e some sozinho.
-- [ ] Validação visual interativa (Playwright headed, janela aberta) com o
-      usuário — ajustes finais de UX/layout.
+- [x] Validação visual interativa (Playwright headed, janela aberta) com o
+      usuário — confirmado, sem ajustes adicionais de UX/layout.
 
 ## Transversais
 - [x] Branch `feature/0005-incluir-lancamento` criada nos 3 repos.
 - [x] Atualizar `state.md` da spec a cada mudança de fase.
-- [ ] Commits + push + PR (frontend, backend, specs) só após validação do
+- [x] Commits + push + PR (frontend, backend, specs) após validação do
       usuário.
