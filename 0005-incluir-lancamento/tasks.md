@@ -16,16 +16,23 @@
 - [x] Adicionar `calcularValorLote(lote)` (e
       `calcularQuantidadeLancamentos`) em `src/lotes.js`, usada
       internamente por `buscarLotes()` para os filtros `valorDe`/`valorAte`.
-- [x] Adicionar função `criarLoteComLancamento(lancamento, instituicaoId)`
-      em `src/lotes.js`: cria um lote novo (situação `Aberto`,
-      `instituicaoId`/`instituicaoRespId` = instituição da conta) com o
-      lançamento dentro; devolve o lote criado.
+- [x] Adicionar função `criarLoteComLancamento(lancamento, instituicaoId,
+      usuarioRegistroId)` em `src/lotes.js`: cria um lote novo (situação
+      `Aberto`, `instituicaoId`/`instituicaoRespId` = instituição da conta,
+      `usuarioRegistro` = usuário autenticado no token) com o lançamento
+      dentro; devolve o lote criado.
+- [x] `paraApi(lote)`: o objeto `instituicao` inclui `contasCorrentes`
+      (via `listarContasPorInstituicao`), tanto na listagem quanto no
+      detalhe — não aparece na tela, mas precisa vir no JSON.
 - [x] Criar `mocks/routes/contas-correntes.js` com
       `GET /api/contas-correntes?numero=...` (localiza a conta; 404 se não
-      achar; devolve `{ conta, instituicao }`).
+      achar; devolve `{ conta, instituicao }`) e, sem `numero`, lista todas
+      as contas com a instituição (para o select pesquisável do front).
 - [x] Criar `mocks/routes/lancamentos.js` com `POST /api/lancamentos`
       (cria lançamento + lote novo; 400 se `contaCorrenteId` inválido,
-      `valor` ausente/≤0, `historico` ausente, `documentos` vazio).
+      `valor` ausente/≤0, `historico` ausente, `documentos` vazio);
+      `usuarioRegistro` do lote criado é resolvido a partir do token JWT-like
+      do request (`src/auth-token.js`), não um placeholder do seed.
 - [x] Atualizar `mocks/collections.js` (collection `base`) com as rotas
       novas.
 - [x] Validar manualmente (script Node, evitando problema de encoding do
@@ -63,21 +70,40 @@
   - [x] Labels com marcador de "obrigatório" (`*` + legenda); mensagem de
         erro por campo.
   - [x] Botão de confirmação desabilitado enquanto `form.invalid`.
-  - [x] Grade de lançamentos incluídos na sessão da modal, com barra
-        Visualizar/Alterar/Excluir/Duplicar por linha (placeholder — só
-        Incluir tem lógica real nesta spec).
+  - [x] Conta Corrente é um select pesquisável (`<input list>` +
+        `<datalist>`), cada opção mostrando
+        `"{Instituicao.nome} - agencia: {agencia} conta: {conta}"`.
+  - [x] Documento é uma área de arrastar-e-soltar (dropzone), como sites
+        comuns usam, além do clique para escolher arquivo.
+  - [x] Valor usa a mesma máscara BRL em tempo real do filtro "Valor Lote"
+        (extraída para `shared/utils/mascara-moeda.util.ts`, reaproveitada
+        pelo `RangeFieldComponent`).
+  - [x] Ao concluir a inclusão com sucesso, a modal fecha imediatamente
+        (`incluido` + `closed` emitidos) em vez de ficar aberta para uma
+        sessão de múltiplas inclusões — removida a grade "lançamentos
+        incluídos nesta sessão" e os botões placeholder por linha.
 - [x] Ligar `onAction('incluir')` em `LotesPageComponent` para abrir essa
       modal (trocou o placeholder `facade.incluir()`).
+- [x] Criar `AvisoToastComponent` (`shared/aviso-toast/`): aviso não-modal
+      reutilizável com `@Input` de `titulo`, `mensagem`, `tipo`
+      (`success`/`warning`/`info`) e `tempo` (segundos); barra de
+      progresso anima o tempo se esvaindo e fecha sozinho ao zerar.
+      `LotesPageComponent` mostra esse aviso quando
+      `IncluirLancamentoDialogComponent` emite `incluido`.
 - [x] Testes unitários: `calcularValorLote`/`calcularQuantidadeLancamentos`
       (`lote.model.spec.ts`), `IncluirLancamentoDialogComponent`
       (validações, busca de conta sucesso/erro, habilitação do botão de
-      confirmação, inclusão com sucesso reseta o formulário), facade
-      (`buscarContaCorrente`, `incluirLancamento`), `LotesPageComponent`
-      (`onAction('incluir')` abre a modal).
-- [x] Validação inicial via Playwright headless: coluna Valor calculada
-      bate com o protótipo, busca de conta exibe titular, botão Incluir
-      trava sem documento e libera com tudo preenchido, inclusão real
-      aparece na grade da modal.
+      confirmação, inclusão com sucesso fecha a modal e emite `incluido`),
+      `AvisoToastComponent` (visibilidade, conteúdo, fechamento automático
+      por tempo via `fakeAsync`, fechamento manual), facade
+      (`buscarContaCorrente`, `listarContasCorrentes`, `incluirLancamento`),
+      `LotesPageComponent` (`onAction('incluir')` abre a modal).
+- [x] Validação via Playwright: coluna Valor calculada bate com o
+      protótipo, busca de conta exibe titular, botão Incluir trava sem
+      documento e libera com tudo preenchido; fluxo completo de inclusão
+      real (select pesquisável + dropzone + POST /api/lancamentos)
+      confirma `usuarioRegistro` do lote como o usuário autenticado, modal
+      fecha e o toast de sucesso aparece, anima a barra e some sozinho.
 - [ ] Validação visual interativa (Playwright headed, janela aberta) com o
       usuário — ajustes finais de UX/layout.
 
