@@ -1,20 +1,15 @@
 # Estado da Spec 0005
 
-- Fase atual: implementacao (backend concluído)
-- Última ação: backend implementado e commitado — entidades ContaCorrente/
-  Lancamento/Instituicao (compartilhada), Lote sem valor/quantidadeLancamentos
-  próprios (sempre calculado), rotas GET /api/contas-correntes e
-  POST /api/lancamentos; validado com script Node (curl+bash mangla
-  acentuação UTF-8 no corpo JSON — usar Node para testes manuais com texto
-  acentuado).
-- Próximo passo: implementar frontend (modelos, funções de cálculo,
-  ajuste da tabela de consulta, IncluirLancamentoDialogComponent).
+- Fase atual: em-testes (frontend implementado, aguardando validação
+  visual interativa do usuário)
+- Última ação: frontend implementado e commitado — modelos (ContaCorrente,
+  Lancamento), funções de cálculo de valor/quantidade, LoteFacade com
+  buscarContaCorrente/incluirLancamento, IncluirLancamentoDialogComponent
+  completo (formulário reativo, validações, grade). Build + 53 testes
+  unitários verdes. Validação inicial automatizada confirmou o fluxo
+  ponta a ponta (busca de conta, validações do botão Incluir, inclusão
+  real refletida na grade da modal e na tabela de consulta).
+- Próximo passo: usuário validar visualmente (janela Playwright headed
+  aberta) e passar ajustes finais.
 - Bloqueios: nenhum
 - Atualizado em: 2026-09-13
-
-## Notas técnicas
-- `curl -d '{"historico":"Lançamento Manual"}'` via heredoc no Git Bash do
-  Windows corrompe caracteres acentuados (virava "Histórico inválido"
-  mesmo enviando o valor certo) — não é bug do backend. Testes manuais
-  com acentuação devem usar um script Node (http.request com
-  Content-Type charset=utf-8) em vez de curl direto no bash.
